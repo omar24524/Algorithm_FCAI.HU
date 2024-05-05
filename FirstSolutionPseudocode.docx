@@ -1,0 +1,32 @@
+Algorithm SelectionSort(nums)
+    For i from 0 to length(nums) - 1
+        Set min_idx to i
+        For j from i + 1 to length(nums)
+            If nums[j] < nums[min_idx]
+                Set min_idx to j
+        End If
+        End For
+        Swap nums[i] with nums[min_idx]
+    End For
+End Algorithm
+
+Algorithm WiggleSort(nums)
+    Call SelectionSort(nums)
+    
+    If length(nums) mod 2 equals 0
+        Set mid to length(nums) / 2
+    Else
+        Set mid to (length(nums) / 2) + 1
+    End If
+    
+    Set first_half to reverse(nums[0 to mid - 1])
+    Set second_half to reverse(nums[mid to length(nums) - 1])
+    
+    For i from 0 to mid - 1
+        Set nums[2 * i] to first_half[i]
+    End For
+    
+    For i from 0 to length(second_half) - 1
+        Set nums[2 * i + 1] to second_half[i]
+    End For
+End Algorithm
