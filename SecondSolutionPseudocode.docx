@@ -1,0 +1,27 @@
+Function IDX(i: Integer, n: Integer) returns Integer
+    Return (2 * i + 1) modulo (n OR 1)
+End Function
+
+Function wiggleInterleaved4(arr: Array of Integer) returns Array of Integer
+    Sort arr
+    Set n to length of arr
+    Set mid to arr[n right-shift 1]
+    Set i to 0
+    Set j to 0
+    Set k to n - 1
+    
+    While j <= k
+        If arr[IDX(j, n)] > mid Then
+            Swap arr[IDX(j, n)] with arr[IDX(i, n)]
+            Increment i by 1
+            Increment j by 1
+        Else If arr[IDX(j, n)] < mid Then
+            Swap arr[IDX(j, n)] with arr[IDX(k, n)]
+            Decrement k by 1
+        Else
+            Increment j by 1
+        End If
+    End While
+    
+    Return arr
+End Function
