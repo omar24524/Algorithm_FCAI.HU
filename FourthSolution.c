@@ -11,14 +11,14 @@ void wiggleSort(int* nums, int numsSize) {
 }
 
 void wiggleSortRec(int* nums, int numsSize, int counter) {
-    if (counter >= numsSize - 1) return;
+    if (counter <= 0) return;
 
-    if ((counter % 2 == 0 && nums[counter] >= nums[counter + 1]) || (counter % 2 != 0 && nums[counter] <= nums[counter + 1])) {
+    if ((counter % 2 == 0 && nums[counter] >= nums[counter - 1]) || (counter % 2 != 0 && nums[counter] <= nums[counter - 1])) {
         int temp = nums[counter];
-        nums[counter] = nums[counter + 1];
-        nums[counter + 1] = temp;
+        nums[counter] = nums[counter - 1];
+        nums[counter - 1] = temp;
     }
-    wiggleSortRec(nums, numsSize, counter + 1);
+    wiggleSortRec(nums, numsSize, counter - 1);
 }
 int main()
 {
@@ -31,9 +31,9 @@ int main()
         printf("element num #%d: ",i+1);
         scanf("%d",&arr[i]);
     }
-    // selectionSort(arr,n);
-    wiggleSort(arr,n);
-    // wiggleSortRec(arr,n,0);
+
+    // wiggleSort(arr,n);
+    wiggleSortRec(arr,n,n-1);
     for(int i=0; i<n; i++)
     {
         printf("%d, ",arr[i]);
