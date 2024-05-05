@@ -1,0 +1,28 @@
+Function sortReverse(arr: Array of Integer) returns Array of Integer
+    For i from 1 to length(arr) - 1
+        Set key to arr[i]
+        Set j to i - 1
+        While j >= 0 AND key > arr[j]
+            Set arr[j + 1] to arr[j]
+            Decrement j by 1
+        End While
+        Set arr[j + 1] to key
+    End For
+    Return arr
+End Function
+
+Function interleave(arr1: Array of Integer, arr2: Array of Integer) returns Array of Integer
+    If arr1 is empty
+        Return arr2
+    End If
+    If arr2 is empty
+        Return arr1
+    End If
+    Return [arr2[0]] + Call interleave(arr2 from index 1 to end, arr1)
+End Function
+
+Function wiggleAtya2(arr: Array of Integer) returns Array of Integer
+    Set arr to Call sortReverse(arr)
+    Set mid to length(arr) right-shift 1
+    Return Call interleave(arr from start to mid - 1, arr from mid to end)
+End Function
