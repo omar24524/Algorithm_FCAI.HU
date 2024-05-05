@@ -1,0 +1,39 @@
+Procedure wiggleSort(nums: Array of Integer, numsSize: Integer)
+    For i from 0 to numsSize - 2
+        If (i is even AND nums[i] >= nums[i + 1]) OR (i is odd AND nums[i] <= nums[i + 1]) Then
+            Swap nums[i] and nums[i + 1]
+        End If
+    End For
+End Procedure
+
+Procedure wiggleSortRec(nums: Array of Integer, numsSize: Integer, counter: Integer)
+    If counter >= numsSize - 1 Then
+        Return
+    End If
+
+    If (counter is even AND nums[counter] >= nums[counter + 1]) OR (counter is odd AND nums[counter] <= nums[counter + 1]) Then
+        Swap nums[counter] and nums[counter + 1]
+    End If
+
+    Call wiggleSortRec(nums, numsSize, counter + 1)
+End Procedure
+
+Procedure main()
+    Declare n as Integer
+    Output "Enter the number of elements !"
+    Input n
+    Declare arr as Array of Integer with size n
+
+    For i from 0 to n - 1
+        Output "element num #", i + 1, ": "
+        Input arr[i]
+    End For
+
+    Call wiggleSort(arr, n)
+
+    For i from 0 to n - 1
+        Output arr[i], ", "
+    End For
+
+    Return 0
+End Procedure
