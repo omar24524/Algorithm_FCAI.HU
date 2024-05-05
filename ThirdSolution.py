@@ -3,7 +3,7 @@ def interleave(arr1, arr2):
         return arr2
     if not arr2:
         return arr1
-    return [arr2[0]]+interleave_arrays(arr2[1:], arr1)
+    return [arr2[0]]+interleave(arr2[1:], arr1)
 def wiggleAtya2(arr:list):
     arr= sorted(arr)#any sorting algorithm
     mid= len(arr)>>1
