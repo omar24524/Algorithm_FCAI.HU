@@ -1,27 +1,88 @@
-Function IDX(i: Integer, n: Integer) returns Integer
-    Return (2 * i + 1) modulo (n OR 1)
+Procedure swap(a: Pointer to Integer, b: Pointer to Integer)
+    Declare temp as Integer
+    Set temp to value pointed by a
+    Set value pointed by a to value pointed by b
+    Set value pointed by b to temp
+End Procedure
+
+Function HEAP_LEFT(i: Integer) returns Integer
+    Return 2 * i + 1
 End Function
 
-Function wiggleInterleaved4(arr: Array of Integer) returns Array of Integer
-    Sort arr
-    Set n to length of arr
-    Set mid to arr[n right-shift 1]
+Function HEAP_RIGHT(i: Integer) returns Integer
+    Return 2 * i + 2
+End Function
+
+Function HEAP_PARENT(i: Integer) returns Integer
+    Return i right-shift 1
+End Function
+
+Procedure heap_max(heap: Pointer to Array of Integer, count: Integer, i: Integer)
+    Declare l as Integer and set to HEAP_LEFT(i)
+    Declare r as Integer and set to HEAP_RIGHT(i)
+    Declare largest as Integer and set to i
+    If l < count AND heap[l] > heap[i] Then
+        Set largest to l
+    End If
+    If r < count AND heap[r] > heap[largest] Then
+        Set largest to r
+    End If
+    If largest is not equal to i Then
+        Call swap with heap[i] and heap[largest]
+        Call heap_max with heap, count, largest
+    End If
+End Procedure
+
+Function heap_sort(arr: Pointer to Array of Integer, count: Integer) returns Pointer to Array of Integer
+    For i from (count right-shift 1) - 1 down to 0
+        Call heap_max with arr, count, i
+    End For
+    For i from count - 1 down to 1
+        Call swap with arr[0] and arr[i]
+        Call heap_max with arr, i, 0
+    End For
+    Return arr
+End Function
+
+Function ssort(arr: Pointer to Array of Integer, n: Integer) returns Pointer to Array of Integer
+    For i from 0 to n - 1
+        For j from i + 1 to n
+            If arr[i] > arr[j] Then
+                Call swap with arr[i] and arr[j]
+            End If
+        End For
+    End For
+    Return arr
+End Function
+
+Function wigglePermute(arr: Pointer to Array of Integer, n: Integer) returns Pointer to Array of Integer
+    Declare i, j, k as Integers
     Set i to 0
     Set j to 0
     Set k to n - 1
-    
-    While j <= k
-        If arr[IDX(j, n)] > mid Then
-            Swap arr[IDX(j, n)] with arr[IDX(i, n)]
-            Increment i by 1
-            Increment j by 1
-        Else If arr[IDX(j, n)] < mid Then
-            Swap arr[IDX(j, n)] with arr[IDX(k, n)]
-            Decrement k by 1
+    Call heap_sort with arr, n
+    Declare mid as Integer and set to arr[n right-shift 1]
+    While j is less than or equal to k
+        If arr[(2 * j + 1) modulo (n OR 1)] > mid Then
+            Call swap with addresses of arr[(2 * i + 1) modulo (n OR 1)] and arr[(2 * j + 1) modulo (n OR 1)]
+            Increment i and j
+        Else If arr[(2 * j + 1) modulo (n OR 1)] < mid Then
+            Call swap with addresses of arr[(2 * j + 1) modulo (n OR 1)] and arr[(2 * k + 1) modulo (n OR 1)]
+            Decrement k
         Else
-            Increment j by 1
+            Increment j
         End If
     End While
-    
     Return arr
 End Function
+
+Procedure main()
+    Declare arr as Array of Integer with elements {0, 1, 2, 3}
+    Declare n as Integer and set to size of arr
+    Call wigglePermute with arr, n
+    For i from 0 to n - 1
+        Output arr[i] followed by a space
+    End For
+    Output a newline character
+    Return 0
+End Procedure
