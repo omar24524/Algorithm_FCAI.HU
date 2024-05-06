@@ -19,11 +19,11 @@ def wiggle_sort(nums):
     mid = len(nums) // 2 if len(nums) % 2 == 0 else len(nums) // 2 + 1      :O(1)
     
     # Step 3: Reverse the first half and the second half
-    first_half = nums[:mid][::-1]                                                  :O(1)
-    second_half = nums[mid:][::-1]                                                  :O(1)
+    first_half = nums[:mid][::-1]                                                  :O(n/2)
+    second_half = nums[mid:][::-1]                                                  :O(n/2)
     
     # Step 4: Merge the two halves element by element
-    nums[::2], nums[1::2] = first_half, second_half                                  :O(1)
+    nums[::2], nums[1::2] = first_half, second_half                                  :O(n)
 
 
 Then the Complexity of the wiggle_sort function is O(N^2)  #depend on the Sorting algorithm 
