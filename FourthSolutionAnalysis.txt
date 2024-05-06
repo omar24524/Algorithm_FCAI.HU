@@ -1,0 +1,21 @@
+void wiggleSortRec(int* nums, int numsSize, int counter) {
+    if (counter <= 0) return;
+
+    if ((counter % 2 == 0 && nums[counter] >= nums[counter - 1]) || (counter % 2 != 0 && nums[counter] <= nums[counter - 1])) {
+        int temp = nums[counter];
+        nums[counter] = nums[counter - 1];
+        nums[counter - 1] = temp;
+    }
+    wiggleSortRec(nums, numsSize, counter - 1);
+}
+
+The Recurrence Equation :
+      T(n) = T(n-1) + 1
+           = T(n-2) + 2
+           = T(n-3) + 3
+
+The General Form : 
+      T(n) = T(n-k) + k     # k = n-1
+T(n) = T(n-n+1) + n-1 = 1+n-1 = n 
+
+T(n) = O(n)
