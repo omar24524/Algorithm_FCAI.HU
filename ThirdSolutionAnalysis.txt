@@ -29,7 +29,7 @@ def interleave(arr1, arr2):
 
 
 def wiggleAtya2(arr:list):
-    arr= sortReverse(arr)#any sorting algorithm    #O(n)
+    arr= sortReverse(arr)#any sorting algorithm    #O(n^2)
     mid= len(arr)>>1                               #O(1)
     return interleave(arr[:mid], arr[mid:])        #O(n)
 
