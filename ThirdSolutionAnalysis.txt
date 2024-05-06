@@ -17,10 +17,20 @@ def interleave(arr1, arr2):
     return [arr2[0]]+interleave(arr2[1:], arr1)
       The Recurrence Equation :
             T(n) = T(n-1) + 1
+                  = T(n-2) + 2
+                  = T(n-3) + 3
+
+    The General Form : 
+      T(n) = T(n-k) + k     # k = n-1
+      T(n) = T(n-n+1) + n-1 = 1+n-1 = n 
+
+        #T(n) = O(n)
 
 
 
 def wiggleAtya2(arr:list):
-    arr= sortReverse(arr)#any sorting algorithm
-    mid= len(arr)>>1
-    return interleave(arr[:mid], arr[mid:])
+    arr= sortReverse(arr)#any sorting algorithm    #O(n)
+    mid= len(arr)>>1                               #O(1)
+    return interleave(arr[:mid], arr[mid:])        #O(n)
+
+The Overall Complexity is O(n^2)
