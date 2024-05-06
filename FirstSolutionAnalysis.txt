@@ -1,1 +1,29 @@
+def selection_sort(nums):
+    for i in range(len(nums)):
+        # Find the minimum element in the remaining unsorted array
+        min_idx = i                                                   :O(1)
+        for j in range(i+1, len(nums)):
+            if nums[j] < nums[min_idx]:
+                min_idx = j                                            :O(1)*O(N) = O(N)  N : #of elements
+        # Swap the found minimum element with the first element
+        nums[i], nums[min_idx] = nums[min_idx], nums[i]                :O(N) 
 
+
+The Overall analysis is O(N^2) Of The Selection sort function
+
+def wiggle_sort(nums):
+    # Step 1: Sort the array using selection sort
+    selection_sort(nums)     :O(N^2)
+    
+    # Step 2: Find the middle index
+    mid = len(nums) // 2 if len(nums) % 2 == 0 else len(nums) // 2 + 1      :O(1)
+    
+    # Step 3: Reverse the first half and the second half
+    first_half = nums[:mid][::-1]                                                  :O(1)
+    second_half = nums[mid:][::-1]                                                  :O(1)
+    
+    # Step 4: Merge the two halves element by element
+    nums[::2], nums[1::2] = first_half, second_half                                  :O(1)
+
+
+Then the Complexity of the wiggle_sort function is O(N^2)  #depend on the Sorting algorithm 
