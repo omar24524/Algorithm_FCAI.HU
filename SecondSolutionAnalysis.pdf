@@ -1,0 +1,32 @@
+macro ARR(IDX) a[((IDX)*2+1)%(n|1)] //calculates new index
+wiggleSort(a[0..n]):
+k= 0
+kstart= 0
+kend= n-1
+heapsort(a) //or any sorting algorithm O(nlogn)
+median= arr[⌊n/2⌋]
+while k<=kend: O(n)
+if ARR(k)>median:
+swap(ARR(kstart++), ARR(k++))
+else if ARR(k)<median:
+swap(ARR(k), ARR(kend--))
+else
+k++
+In the while loop, we iterate over all elements of the array. O(n)
+The overall time complexity depends more on the complexity of 
+the sorting algorithm used + O(n) of the while loop.
+T(n)= O(max(n, sort)).
+T(n)= O(max(n, nlogn))= O(nlogn) in case of heapsort/mergesort.
+T(n)= O(max(n, n^2))= O(n^2) in case of selection/insertion sort.
+Note: the macro is used to rearrange the elements in a specific 
+pattern (deinterleaving the array).
+((IDX)*2+1)%(n|1)
+e.g.
+0 1 2 3 4 (n|1==5)
+Before calculation:
+0 2 4 →
+1 3 
+After calculation:
+ 0 2 4 →
+1 3 
+1 3 0 2 
